@@ -1,0 +1,83 @@
+<html><head></head><body>
+<h1>Connecting to an IMAP server</h1>
+ImapX allows you to specify the server, port and encryption in three different ways:<br>
+<ul>
+<li>Using one of the parameterized constructors when initializing a new ImapClient.
+</li><li>Using the client properties. </li><li>Setting the connection parameters right on calling the Connect method.</li></ul>
+<h2>Initializing the client</h2>
+No SSL, default port (143) for connection<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Blue">var</span> client = <span style="color:Blue">new</span> ImapClient(<span style="color:#A31515">&quot;imap.server.com&quot;</span>);
+</pre>
+</div>
+<br>
+SSL, default port (993) for connection<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Blue">var</span> client = <span style="color:Blue">new</span> ImapClient(<span style="color:#A31515">&quot;imap.server.com&quot;</span>, <span style="color:Blue">true</span>); 
+</pre>
+</div>
+<br>
+SSL, default port (993) for connection, disable certificate validation<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Blue">var</span> client = <span style="color:Blue">new</span> ImapClient(<span style="color:#A31515">&quot;imap.server.com&quot;</span>, <span style="color:Blue">true</span>, <span style="color:Blue">false</span>); 
+</pre>
+</div>
+<br>
+No SSL, custom port for connection<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Blue">var</span> client = <span style="color:Blue">new</span> ImapClient(<span style="color:#A31515">&quot;imap.server.com&quot;</span>, 888);
+</pre>
+</div>
+<br>
+SSL, custom port for connection<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Blue">var</span> client = <span style="color:Blue">new</span> ImapClient(<span style="color:#A31515">&quot;imap.server.com&quot;</span>, 888, <span style="color:Blue">true</span>); 
+</pre>
+</div>
+<br>
+SSL, custom port for connection, disable certificate validation<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Blue">var</span> client = <span style="color:Blue">new</span> ImapClient(<span style="color:#A31515">&quot;imap.server.com&quot;</span>, 888, <span style="color:Blue">true</span>, <span style="color:Blue">false</span>);
+</pre>
+</div>
+<br>
+TLS, custom port for connection, disable certificate validation<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Blue">var</span> client = <span style="color:Blue">new</span> ImapClient(<span style="color:#A31515">&quot;imap.server.com&quot;</span>, 888, SslProtocols.Tls, <span style="color:Blue">false</span>); 
+</pre>
+</div>
+<h2>Connecting</h2>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Blue">if</span>(client.Connect( <span style="color:Green">/* optional, use parameters here */</span> )) {
+     <span style="color:Green">// connection successful</span>
+}
+<span style="color:Blue">else</span> {
+     <span style="color:Green">// connection not successful</span>
+}
+</pre>
+</div>
+<br>
+<b>Next</b><br>
+<ul>
+<li><a href="wikipage (2).html">Authentication</a>
+<ul>
+<li><a href="wikipage (3).html">Using a login and password</a>
+</li><li><a href="wikipage (4).html">Using OAuth2</a></li></ul>
+</li></ul>
+<br>
+</body></html>

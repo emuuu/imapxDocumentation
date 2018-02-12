@@ -1,0 +1,18 @@
+<html><head></head><body>
+<h1>Debugging ImapX</h1>
+ImapX allows you to create a log file with all requests sent and all responses received. In order to do this, do the following<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">// Add this on application startup, remember to change the path</span>
+Debug.Listeners.Add(<span style="color:Blue">new</span> TextWriterTraceListener(<span style="color:#A31515">@&quot;C:\users\public\test.txt&quot;</span>));
+Debug.AutoFlush = <span style="color:Blue">true</span>;
+
+<span style="color:Green">// After you created the client, set</span>
+client.IsDebug = <span style="color:Blue">true</span>;
+</pre>
+</div>
+<br>
+<b>Also remember to turn on the &quot;Define DEBUG constant&quot; setting in your project&#39;s build properties.</b><br>
+<br>
+<b>Important:</b> Please consider that the log file will contain the login and password you have used. Remeber to remove it before you send the log for review!</body></html>

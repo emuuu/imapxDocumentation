@@ -1,0 +1,28 @@
+<html><head></head><body>
+<h1>Optimization: Folder browse modes </h1>
+ImapX allows you to optimize the folder browsing to reduce the number of requests to server.
+<br>
+<h2>Lazy or complete folder structure requesting</h2>
+By default, ImapX will load two levels of your folder tree when you access the <i>
+Folders</i> property. The subfolders which are deeper, will be request on demand. If you like to request the whole folder structure right on first access, simply change the client behavior:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>          
+client.Behavior.FolderTreeBrowseMode = FolderTreeBrowseMode.Full; 
+</pre>
+</div>
+<br>
+<b>Warning:</b> If you set the browse mode to <i>Full</i> and your folder structure has cycles, you will end up in an infinite loop!<br>
+<h2>Automatic examination of folders</h2>
+By default ImapX will examine folders (e.g request the total number of messages and recent messages) when the tree structure is loaded. If you don&#39;t need this information right away, you can disable the automatic examination.
+<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>          
+client.Behavior.ExamineFolders = <span style="color:Blue">false</span>; 
+</pre>
+</div>
+<br>
+</body></html>

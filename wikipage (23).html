@@ -1,0 +1,126 @@
+<html><head></head><body>
+<h1>Idle support</h1>
+ImapX supports idle, so you can receive new messages just-in-time. Once new messages arrive in the current folder, they will be downloaded automatically and an event will be fired.<br>
+<h2>Important notice about idle</h2>
+With the idle extension you can only get notifications for new messages for <u>one</u> folder at a time. Once another folder is selected, idle will be stopped.<br>
+<h2>Quick start</h2>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>  
+
+client.Folders.Inbox.OnNewMessagesArrived &#43;= Folder_OnNewMessagesArrived;
+client.Folders.Inbox.StartIdling();
+
+<span style="color:Blue">void</span> Folder_OnNewMessagesArrived(<span style="color:Blue">object</span> sender, IdleEventArgs e)
+{
+       <span style="color:Green">// New messages arrived</span>
+       <span style="color:Green">// e.Folder: The folder in which the messages have arrived</span>
+       <span style="color:Green">// e.Messages: The new messages</span>
+}
+
+</pre>
+</div>
+<h2>Checking if your server supports idle</h2>
+You can check if your server supports the IDLE extension, however this check is not necessary as it is being done automatically once you try to start idle for a folder.<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>          
+<span style="color:Blue">if</span>(client.Capabilities.Idle)
+{
+      <span style="color:Green">// Server supports idle</span>
+}
+</pre>
+</div>
+<h2>Global events</h2>
+There are four global idle events you can subscribe to - <i>OnIdleStarted</i>, <i>
+OnIdlePaused</i>, <i>OnIdleStopped </i>and <i>OnNewMessagesArrived</i>. <br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>          
+client.OnIdleStarted &#43;= ImapClient_OnIdleStarted;
+client.OnIdlePaused &#43;= ImapClient_OnIdlePaused;
+client.OnIdleStopped &#43;= ImapClient_OnIdleStopped;
+client.OnNewMessagesArrived &#43;= ImapClient_OnNewMessagesArrived;
+
+<span style="color:Blue">void</span> ImapClient_OnIdleStarted(<span style="color:Blue">object</span> sender, IdleEventArgs e)
+{
+       <span style="color:Green">// Idle has been started</span>
+       <span style="color:Green">// e.Folder: Folder for which idle has been started</span>
+}
+
+<span style="color:Blue">void</span> ImapClient_OnIdlePaused(<span style="color:Blue">object</span> sender, IdleEventArgs e)
+{
+       <span style="color:Green">// Idle has been paused. This happens when other commands are being sent to the server.</span>
+       <span style="color:Green">// This event is only for informational, idle is being resumed automatically, so no action is required.</span>
+       <span style="color:Green">// e.Folder: Folder for which idle has been paused</span>
+}
+
+<span style="color:Blue">void</span> ImapClient_OnIdleStopped(<span style="color:Blue">object</span> sender, IdleEventArgs e)
+{
+       <span style="color:Green">// Idle has been stopped</span>
+       <span style="color:Green">// e.Folder: Folder for which idle has been stopped</span>
+}
+
+<span style="color:Blue">void</span> ImapClient_OnNewMessagesArrived(<span style="color:Blue">object</span> sender, IdleEventArgs e)
+{
+       <span style="color:Green">// New messages arrived</span>
+       <span style="color:Green">// e.Folder: The folder in whichthe messages have arrived</span>
+       <span style="color:Green">// e.Messages: The new messages</span>
+}
+
+</pre>
+</div>
+<h2>Folder events</h2>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>     
+<span style="color:Green">/* .. folder = any folder .. */</span>
+     
+folder.OnNewMessagesArrived &#43;= Folder_OnNewMessagesArrived;
+
+<span style="color:Blue">void</span> Folder_OnNewMessagesArrived(<span style="color:Blue">object</span> sender, IdleEventArgs e)
+{
+       <span style="color:Green">// New messages arrived</span>
+       <span style="color:Green">// e.Folder: The folder in which the messages have arrived</span>
+       <span style="color:Green">// e.Messages: The new messages</span>
+}
+
+</pre>
+</div>
+<h2>Starting idle</h2>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>     
+<span style="color:Green">/* .. folder = any folder .. */</span>
+folder.StartIdling()
+</pre>
+</div>
+<h2>Stopping idle</h2>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>     
+<span style="color:Green">/* .. folder = any folder .. */</span>
+folder.StopIdling()
+</pre>
+</div>
+<h2>Keeping up the idle connection</h2>
+Whenever you are using idle, it can happen that in a period of time there will be no new messages arriving and the client is not performing any other actions. In this case, the server will stop idle at some point. Most servers use a timeout of around 840 seconds.
+ ImapX will keep up the connection by sending a NOOP command every 840 seconds, unless there was some other action in meantime.<br>
+<br>
+If your server has a lower timeout, you can always change it:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>     
+<span style="color:Green">/* .. folder = any folder .. */</span>
+
+<span style="color:Green">// Set the timeout to 120 seconds</span>
+client.Behavior.NoopIssueTimeout = 120;
+
+<span style="color:Green">// .. start idle, client will now send a NOOP command every 120 seconds (if no other activity) in order to keep up the connection.</span>
+</pre>
+</div>
+<br>
+</body></html>

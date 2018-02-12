@@ -1,0 +1,50 @@
+<html><head></head><body>
+<h1>Searching and downloading messages</h1>
+ImapX allows you to request messages in various different ways.<br>
+<h2>Accessing messages through Folder.Messages</h2>
+By default, the <i>Messages</i> collection of a <i>Folder</i> will be empty. To download messages, make a call to the
+<i>Download</i> method:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>        
+<span style="color:Green">/* .. folder = any folder .. */</span>  
+folder.Messages.Download(<span style="color:Green">/* optional, add filter, change download mode, limit number of messages */</span>)
+</pre>
+</div>
+<br>
+If you don&#39;t want to call the <i>Download</i> method on every folder, you can simply set the client behavior to automatically populate the
+<i>Folder.Messages</i> collection:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>          
+client.Behavior.AutoPopulateFolderMessages = <span style="color:Blue">true</span>; 
+</pre>
+</div>
+<h2>Requesting messages through Folder.Search</h2>
+You can also use the <i>Folder.Search</i> method to request messages. All found messages will be returned by the Search method, and will also be added to the
+<i>Folder.Messages</i> collection:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>        
+<span style="color:Green">/* .. folder = any folder .. */</span>  
+<span style="color:Blue">var</span> messages = folder.Search(<span style="color:Green">/* optional, add filter, change download mode, limit number of messages */</span>)
+</pre>
+</div>
+<br>
+<h2>Next</h2>
+<ul>
+<li><a href="wikipage (14).html">Working with attachments</a>
+</li><li><a href="wikipage (15).html">Copying messages</a>
+</li><li><a href="wikipage (16).html">Moving messages</a>
+</li><li><a href="wikipage (17).html">Removing messages</a>
+</li><li><a href="wikipage (18).html">Working with message flags</a>
+<ul>
+<li><a href="https://imapx.codeplex.com/wikipage?title=%28Un%29Marking%20the%20message%20as%20read%20%28seen%29&referringTitle=Searching%20and%20downloading%20messages">&#40;Un&#41;Marking the message as read &#40;seen&#41;</a>
+</li><li><a href="https://imapx.codeplex.com/wikipage?title=Adding%2fremoving%20message%20flags&referringTitle=Searching%20and%20downloading%20messages">Adding&#47;removing message flags</a></li></ul>
+</li><li><a href="wikipage (21).html">Creating messages</a>
+</li><li><a href="wikipage (22).html">Exporting messages</a>
+</li><li><a href="wikipage (23).html">Idle support</a></li></ul>
+</body></html>

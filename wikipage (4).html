@@ -1,0 +1,23 @@
+<html><head></head><body>
+<h1>Using OAuth2 to authenticate</h1>
+Some servers (e.g Google Mail) provide support for OAuth2 authentication. With ImapX, you can authenticate using your login and a token:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Blue">var</span> client = <span style="color:Blue">new</span> ImapClient(<span style="color:#A31515">&quot;imap.gmail.com&quot;</span>, <span style="color:Blue">true</span>);
+
+<span style="color:Blue">if</span>(client.Connect()) {
+     
+     <span style="color:Blue">var</span> credentials = <span style="color:Blue">new</span> OAuth2Credentials(<span style="color:#A31515">&quot;login&quot;</span>, <span style="color:#A31515">&quot;token&quot;</span>);
+
+     <span style="color:Blue">if</span>(client.Login(credentials)) {
+          <span style="color:Green">// login successful</span>
+     }
+
+}
+<span style="color:Blue">else</span> {
+     <span style="color:Green">// connection not successful</span>
+}
+</pre>
+</div>
+</body></html>

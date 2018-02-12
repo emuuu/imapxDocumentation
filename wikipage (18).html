@@ -1,0 +1,53 @@
+<html><head></head><body>
+<h1>Working with message flags </h1>
+ImapX allows you to manage message flags. First of all, make sure the flags are downloaded.
+<br>
+<h2>Making sure the message flags are being requested</h2>
+If you didn&#39;t make any changes to <i>ImapClient.Behavior.MessageFetchMode</i> or set it to
+<i>MessageFetchMode.Tiny</i>, <i>MessageFetchMode.Minimal</i>, <i>MessageFetchMode.Basic</i> or
+<i>MessageFetchMode.Full</i>, no changes are required. <br>
+<br>
+Otherwise, you can configure the client to always download flags:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+client.Behavior.MessageFetchMode = client.Behavior.MessageFetchMode | MessageFetchMode.Flags
+</pre>
+</div>
+<br>
+Or download them separately when using <i>Folder.Search</i>, <i>MessageCollection.Download</i> or
+<i>Message.Download</i> methods:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. folder = any folder .. */</span> 
+<span style="color:Green">/* .. message = any message .. */</span> 
+
+message.Download(MessageFetchMode.Flags);
+
+/ * .. or .. */
+
+folder.Messages.Download(MessageFetchMode.Flags);
+
+<span style="color:Green">/* .. or .. */</span>
+
+folder.Search(<span style="color:#A31515">&quot;ALL&quot;</span>, MessageFetchMode.Flags);
+
+</pre>
+</div>
+<h2>Checking which flags are set</h2>
+In order to check which flags are set, enumerate through the <i>Message.Flags</i> collection:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. message = any message .. */</span>  
+message.Flags
+</pre>
+</div>
+<br>
+To make it easier, you can use the predefined values of flags in <b>ImapX.Flags.MessageFlags</b><br>
+<h2>Next</h2>
+<ul>
+<li><a href="https://imapx.codeplex.com/wikipage?title=%28Un%29Marking%20the%20message%20as%20read%20%28seen%29&referringTitle=Working%20with%20message%20flags">&#40;Un&#41;Marking the message as read &#40;seen&#41;</a>
+</li><li><a href="https://imapx.codeplex.com/wikipage?title=Adding%2fremoving%20message%20flags&referringTitle=Working%20with%20message%20flags">Adding&#47;removing message flags</a></li></ul>
+</body></html>

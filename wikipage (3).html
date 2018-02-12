@@ -1,0 +1,18 @@
+<html><head></head><body>
+<h1>Using a login and password to authenticate</h1>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Blue">var</span> client = <span style="color:Blue">new</span> ImapClient(<span style="color:#A31515">&quot;imap.gmail.com&quot;</span>, <span style="color:Blue">true</span>);
+
+<span style="color:Blue">if</span>(client.Connect()) {
+     
+     <span style="color:Blue">if</span>(client.Login(<span style="color:#A31515">&quot;address@gmail.com&quot;</span>, <span style="color:#A31515">&quot;password&quot;</span>)) {
+          <span style="color:Green">// login successful</span>
+     }
+}
+<span style="color:Blue">else</span> {
+     <span style="color:Green">// connection not successful</span>
+}
+</pre>
+</div>
+</body></html>

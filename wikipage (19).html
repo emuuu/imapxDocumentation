@@ -1,0 +1,22 @@
+<html><head></head><body>
+<h1>(Un)Marking the message as read (seen)</h1>
+(Un)Marking a message as read/seen is very simple. Just change the value of <i>Message.Seen</i> property:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. message = any message .. */</span>  
+<span style="color:Blue">if</span>(message.Seen)
+{
+     message.Seen = <span style="color:Blue">false</span>; <span style="color:Green">// Mark message as unseen</span>
+}
+<span style="color:Blue">else</span>
+{
+     message.Seen = <span style="color:Blue">true</span>; <span style="color:Green">// Mark message as seen</span>
+}
+</pre>
+</div>
+<br>
+<h2>Next</h2>
+<ul>
+<li><a href="https://imapx.codeplex.com/wikipage?title=Adding%2fremoving%20message%20flags&referringTitle=%28Un%29Marking%20the%20message%20as%20read%20%28seen%29">Adding&#47;removing message flags</a></li></ul>
+</body></html>

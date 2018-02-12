@@ -1,0 +1,79 @@
+<html><head></head><body>
+<h1>Creating messages </h1>
+In certain situations, when you are using the standard <i>System.Net.Mail.SmtpClient</i> class to send messages, you need to additionally store the sent message in the Sent folder on your server. In this case, you can make use of the
+<i>Folder.AppendMessage</i> method. It can also be used to upload EML data to server to create messages.<br>
+<br>
+<b>Uploading a message sent with System.Net.Mail.SmtpClient</b><br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">// A method for sending messages</span>
+<span style="color:Blue">public</span> MailMessage SendMail(<span style="color:Blue">string</span> server, <span style="color:Blue">string</span> login, <span style="color:Blue">string</span> password, <span style="color:Blue">string</span> <span style="color:Blue">from</span>, <span style="color:Blue">string</span> to, <span style="color:Blue">string</span> subject, <span style="color:Blue">string</span> text)
+{
+	<span style="color:Blue">try</span>
+	{
+		MailMessage mail = <span style="color:Blue">new</span> MailMessage();
+		mail.From = <span style="color:Blue">new</span> MailAddress(<span style="color:Blue">from</span>);
+		mail.To.Add(<span style="color:Blue">new</span> MailAddress(to));
+		mail.Subject = subject;
+		mail.Body = text;
+
+		SmtpClient client = <span style="color:Blue">new</span> SmtpClient();
+		client.Host = smtpServer;
+		client.Port = 587;
+		client.EnableSsl = <span style="color:Blue">true</span>;
+		client.Credentials = <span style="color:Blue">new</span> NetworkCredential(login, password);
+		client.DeliveryMethod = SmtpDeliveryMethod.Network;
+		client.Send(mail);
+
+		<span style="color:Blue">return</span> mail;
+	}
+	<span style="color:Blue">catch</span> (Exception e)
+	{
+		<span style="color:Blue">throw</span> <span style="color:Blue">new</span> Exception(<span style="color:#A31515">&quot;Mail.Send: &quot;</span> &#43; e.Message);
+	}
+}
+
+
+<span style="color:Blue">var</span> imapClient = <span style="color:Blue">new</span> ImapClient(<span style="color:#A31515">&quot;imap.gmail.com&quot;</span>, <span style="color:Blue">true</span>);
+
+<span style="color:Blue">if</span>(imapClient.Connect()) {
+     
+     <span style="color:Blue">if</span>(imapClient.Login(<span style="color:#A31515">&quot;address@gmail.com&quot;</span>, <span style="color:#A31515">&quot;password&quot;</span>)) {
+        
+        <span style="color:Green">// Sending a message</span>
+     	<span style="color:Blue">var</span> newMsg = SendMail(
+     		<span style="color:#A31515">&quot;smtp.gmail.com&quot;</span>,
+     		<span style="color:#A31515">&quot;address@gmail.com&quot;</span>,
+     		<span style="color:#A31515">&quot;password&quot;</span>,
+     		<span style="color:#A31515">&quot;address@gmail.com&quot;</span>,
+     		<span style="color:#A31515">&quot;friend@gmail.com&quot;</span>,
+     		<span style="color:#A31515">&quot;Test Message&quot;</span>,
+     		<span style="color:#A31515">&quot;Hello my friend, this is a test message&quot;</span>
+     	);
+
+     	<span style="color:Green">// Uploading the sent message to the Sent folder</span>
+     	imapClient.Folder.Sent.AppendMessage(newMsg);
+
+     }
+}
+<span style="color:Blue">else</span> {
+     <span style="color:Green">// connection not successful</span>
+}
+</pre>
+</div>
+<br>
+If you want to the client to additionally add some flags for the message, or change the internal date which will be used for the message, just pass the required information in the other two parameters of the
+<i>AppendMessage</i> method:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+imapClient.Folder.Sent.AppendMessage(newMsg, <span style="color:Blue">new</span>[]{ MessageFlags.Flagged }, DateTime.Now);
+</pre>
+</div>
+<br>
+<h2>Next</h2>
+<ul>
+<li><a href="wikipage (22).html">Exporting messages</a>
+</li><li><a href="wikipage (23).html">Idle support</a></li></ul>
+</body></html>

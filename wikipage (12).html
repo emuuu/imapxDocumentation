@@ -1,0 +1,56 @@
+<html><head></head><body>
+<h1>Working with messages</h1>
+Starting from version 2.0.0.10, ImapX allows you to choose the way how messages are being requested. You can set the download mode globally or individually for a search or a single message.<br>
+<h2>Setting the global message download mode.</h2>
+By default, the global download mode is set to Basic. This requests <i>flags</i>,
+<i>headers</i>, <i>body structure</i>, <i>size</i>, <i>internal date</i> and the <i>
+message body</i> (excluding embedded images and attachments).<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">/* .. Init client, authenticate .. */</span>          
+client.Behavior.MessageFetchMode = MessageFetchMode.Basic
+</pre>
+</div>
+<br>
+Out of the box there are four predefined download modes:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">// Request flags, headers and the body structure</span>
+MessageFetchMode.Tiny
+
+<span style="color:Green">// Request flags, headers, body structure, size and internal date</span>
+MessageFetchMode.Minimal
+
+<span style="color:Green">// Request flags, headers, body structure and body, size and internal date</span>
+MessageFetchMode.Basic
+
+<span style="color:Green">// Request flags, headers, body and attachments, size and internal date</span>
+MessageFetchMode.Full
+</pre>
+</div>
+<br>
+If you want to make it more individual, you can build your own bit mask:<br>
+<br>
+<div style="color:Black; background-color:White">
+<pre>
+<span style="color:Green">// Request basic information and GMail mesage id, labels and thread id</span>
+client.Behavior.MessageFetchMode = MessageFetchMode.Basic |  MessageFetchMode.GMailExtendedData
+</pre>
+</div>
+<h2>Next</h2>
+<ul>
+<li><a href="wikipage (13).html">Searching and downloading messages</a>
+</li><li><a href="wikipage (14).html">Working with attachments</a>
+</li><li><a href="wikipage (15).html">Copying messages</a>
+</li><li><a href="wikipage (16).html">Moving messages</a>
+</li><li><a href="wikipage (17).html">Removing messages</a>
+</li><li><a href="wikipage (18).html">Working with message flags</a>
+<ul>
+<li><a href="https://imapx.codeplex.com/wikipage?title=%28Un%29Marking%20the%20message%20as%20read%20%28seen%29&referringTitle=Working%20with%20messages">&#40;Un&#41;Marking the message as read &#40;seen&#41;</a>
+</li><li><a href="https://imapx.codeplex.com/wikipage?title=Adding%2fremoving%20message%20flags&referringTitle=Working%20with%20messages">Adding&#47;removing message flags</a></li></ul>
+</li><li><a href="wikipage (21).html">Creating messages</a>
+</li><li><a href="wikipage (22).html">Exporting messages</a>
+</li><li><a href="wikipage (23).html">Idle support</a></li></ul>
+</body></html>
