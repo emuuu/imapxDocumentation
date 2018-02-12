@@ -1,5 +1,5 @@
 # imapxDocumentation
-The old CodePlex documenation (status as of December 2017) of the ImapX project (https://github.com/azanov/imapx)
+The old CodePlex documentation (status as of December 2017) of the ImapX project (https://github.com/azanov/imapx)
 
 
 This repository only remains as long as the original project documentation is not migrated to its Github repository.
